@@ -8,7 +8,7 @@ class Vertex(object):
         self.code = metro['code']
         self.continent = metro['continent']
         self.timezone = metro['timezone']
-        self.coordinate = metro['coordinates']
+        self.coordinates = metro['coordinates']
         self.edges = dict()
 
     def addEdges(self, edge, destination):
