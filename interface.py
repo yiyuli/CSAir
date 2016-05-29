@@ -1,6 +1,6 @@
 import webbrowser
 
-from graph import Graph
+from graph.graph import Graph
 
 
 def main():
@@ -11,52 +11,52 @@ def main():
     If users enters non-integer query or undefined query, pop error message.
 
     """
-    graph = loadGraph("json/map_data.json")
+    graph = load_graph("json/map_data.json")
 
     while (True):
-        printMenu()
+        print_menu()
         query = input()
         if not is_int(query):
-            printNotIntError()
+            print_not_int_error()
             back = input('\nPress Enter to return to menu\n')
             continue
         query = int(query)
         print('\n')
 
         if query == 0:
-            printCityList(graph)
+            print_city_list(graph)
         elif query == 1:
             code = input('Enter City Code\n')
             print('\n')
-            printCityInfo(graph, code.upper())
+            print_city_info(graph, code.upper())
         elif query == 2:
-            printLongestFlight(graph)
+            print_longest_flight(graph)
         elif query == 3:
-            printShortestFlight(graph)
+            print_shortest_flight(graph)
         elif query == 4:
-            printAverageDistance(graph)
+            print_average_distance(graph)
         elif query == 5:
-            printBiggestCity(graph)
+            print_biggest_city(graph)
         elif query == 6:
-            printSmallestCity(graph)
+            print_smallest_city(graph)
         elif query == 7:
-            printAverageCitySize(graph)
+            print_average_city_cize(graph)
         elif query == 8:
-            printContinentsAndCities(graph)
+            print_continents_and_cities(graph)
         elif query == 9:
-            printHubCities(graph)
+            print_hub_cities(graph)
         elif query == 10:
-            viewMap(graph)
+            view_map(graph)
         elif query == 11:
             print('Good bye')
             break;
         else:
-            printQueryNumberError()
+            print_query_number_error()
 
         back = input('\nPress Enter to return to menu\n')
 
 
-def loadGraph(addr):
+def load_graph(addr):
     """Initialize a Graph object, and load graph info including vertices and edges into the Graph object from the specified file path.
 
     Args:
@@ -70,7 +70,7 @@ def loadGraph(addr):
     return graph
 
 
-def printMenu():
+def print_menu():
     """Print Menu of the user interface.
 
 	"""
@@ -78,7 +78,7 @@ def printMenu():
         'Welcome to CSAir Query Interface\nEnter the corresponding query number \n0. list of all cities \n1. city info \n2. longest flight \n3. shortest flight \n4. average distance \n5. biggest city (by pop) \n6. smallest city (by pop) \n7. average size (by pop) \n8. continents and cities \n9. hub cities \n10. visualized map\n11. exit')
 
 
-def printCityList(graph):
+def print_city_list(graph):
     """Print a list of all cities that CSAir flies to.
 
     Args:
@@ -89,7 +89,7 @@ def printCityList(graph):
         print(city.name + ' (' + city.code + ')')
 
 
-def printCityInfo(graph, code):
+def print_city_info(graph, code):
     """Print specific information about a specific city.
 
     Args:
@@ -100,14 +100,14 @@ def printCityInfo(graph, code):
         print('Input code does not belong to any CSAir served Airport')
         return
     city = graph.vertices[code]
-    printCityInfoHelper(city)
+    print_city_Info_helper(city)
     print('Cities reached by single non-stop: ')
     for neighbor in city.edges.values():
         print('		', neighbor.destination.name, '(' + neighbor.destination.code + ')', 'distance: ',
               neighbor.distance)
 
 
-def printCityInfoHelper(city):
+def print_city_Info_helper(city):
     """Print info of a specific city given its corresonding Vertex object.
 
     Args:
@@ -123,105 +123,105 @@ def printCityInfoHelper(city):
     print('coordinates: ', str(city.coordinates))
 
 
-def printLongestFlight(graph):
+def print_longest_flight(graph):
     """Print info of the longest flight.
 
     Args:
         graph: Graph object that stores map info.
     """
-    longestFlight = graph.calculateLongestEdge()
+    longestFlight = graph.calculate_longest_edge()
     print('Longest Flight:')
     print(longestFlight.departure.code, '->', longestFlight.destination.code, ' distance: ', longestFlight.distance)
 
 
-def printShortestFlight(graph):
+def print_shortest_flight(graph):
     """Print info of the shortest flight.
 
     Args:
         graph: Graph object that stores map info.
     """
-    shortestFlight = graph.calculateShortestEdge()
+    shortestFlight = graph.calculate_shortest_edge()
     print('Shortest Flight:')
     print(shortestFlight.departure.code, '->', shortestFlight.destination.code, ' distance: ', shortestFlight.distance)
 
 
-def printAverageDistance(graph):
+def print_average_distance(graph):
     """Print average distance of all flights in the route network.
 
     Args:
         graph: Graph object that stores map info.
     """
-    print('Average Distance: ', graph.calculateAverageDistance())
+    print('Average Distance: ', graph.calculate_average_distance())
 
 
-def printBiggestCity(graph):
+def print_biggest_city(graph):
     """Print info of the biggest city.
 
     Args:
         graph: Graph object that stores map info.
     """
-    biggestCity = graph.calculateBiggestVertex()
+    biggestCity = graph.calculate_biggest_vertex()
     print('Biggest City:')
-    printCityInfoHelper(biggestCity)
+    print_city_Info_helper(biggestCity)
 
 
-def printSmallestCity(graph):
+def print_smallest_city(graph):
     """Print info of the smallest city.
 
     Args:
         graph: Graph object that stores map info.
     """
-    smallestCity = graph.calculateSmallestVertex()
+    smallestCity = graph.calculate_smallest_vertex()
     print('Smallest City:')
-    printCityInfoHelper(smallestCity)
+    print_city_Info_helper(smallestCity)
 
 
-def printAverageCitySize(graph):
+def print_average_city_cize(graph):
     """Print the average size of all cities in the network.
 
     Args:
         graph: Graph object that stores map info.
     """
-    print('Average city size: ', graph.calculateAverageCitySize())
+    print('Average city size: ', graph.calculate_average_city_size())
 
 
-def printContinentsAndCities(graph):
+def print_continents_and_cities(graph):
     """Print a list of the continents and which cities in them in the route network.
 
     Args:
         graph: Graph object that stores map info.
     """
-    continentsDict = graph.calculateContinentsInfo()
+    continentsDict = graph.calculate_continents_info()
     for key, value in continentsDict.items():
         print('%s: ' % key)
         for city in value:
             print('		', city.name + ' (' + city.code + ')')
 
 
-def printHubCities(graph):
+def print_hub_cities(graph):
     """Print hub cities (with the most direct connections) in the network.
 
     Args:
         graph: Graph object that stores map info.
     """
     print('Hub Cities: ')
-    hubCities = graph.calculateHubCities()
+    hubCities = graph.calculate_hub_cities()
     for city in hubCities:
         print(city.name + ' (' + city.code + ')')
 
 
-def viewMap(graph):
+def view_map(graph):
     """Open a window of Safari and direct to the web page that displays the whole route map.
 
     Args:
         graph: Graph object that stores map info.
     """
-    url = graph.generateMapUrl()
+    url = graph.generate_map_url()
     safari_path = 'open -a /Applications/Safari.app %s'
     webbrowser.get(safari_path).open(url)
 
 
-def printNotIntError():
+def print_not_int_error():
     """Print error message if a query is not an int.
 
     """
@@ -244,7 +244,7 @@ def is_int(query):
     return True
 
 
-def printQueryNumberError():
+def print_query_number_error():
     """Print error message if a query number is not defined.
 
     """
