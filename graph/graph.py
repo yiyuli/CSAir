@@ -1,6 +1,5 @@
 import json
 import sys
-
 from .vertex import Vertex
 from .edge import Edge
 
@@ -17,8 +16,8 @@ class Graph(object):
         """
         self.vertices = dict()
         self.edges = dict()
-        self.numOfVertices = 0
-        self.numOfEdges = 0
+        self.num_vertices = 0
+        self.num_edges = 0
 
 
     def load(self, addr):
@@ -57,14 +56,14 @@ class Graph(object):
             data: JSON object.
         """
         for city in data['metros']:
-            self.numOfVertices += 1
+            self.num_vertices += 1
             self.vertices[city['code']] = Vertex(city)  
 
 
     def load_edges(self, data):
         for route in data['routes']:
-            self.numOfEdges += 1
-            self.edges[self.numOfEdges] = self.build_edge(self.vertices, route)
+            self.num_edges += 1
+            self.edges[self.num_edges] = self.build_edge(self.vertices, route)
 
 
     @staticmethod
@@ -93,14 +92,14 @@ class Graph(object):
         Returns:
             Edge with largest distance.
         """
-        longestFlight = None
-        largestDistance = 0
+        longest_flight = None
+        largest_distance = 0
         for flight in self.edges.values():
-            if flight.distance > largestDistance:
-                largestDistance = flight.distance
-                longestFlight = flight
+            if flight.distance > largest_distance:
+                largest_distance = flight.distance
+                longest_flight = flight
 
-        return longestFlight
+        return longest_flight
 
 
     def calculate_shortest_edge(self):
@@ -109,14 +108,14 @@ class Graph(object):
         Returns:
             Edge with smallest distance.
         """
-        shortestFlight = None
-        smallestDistance = sys.maxsize
+        shortest_flight = None
+        smallest_distance = sys.maxsize
         for flight in self.edges.values():
-            if flight.distance < smallestDistance:
-                smallestDistance = flight.distance
-                shortestFlight = flight
+            if flight.distance < smallest_distance:
+                smallest_distance = flight.distance
+                shortest_flight = flight
 
-        return shortestFlight
+        return shortest_flight
 
 
     def calculate_average_distance(self):
@@ -125,11 +124,11 @@ class Graph(object):
         Returns:
             Average edge distance.
         """
-        averageDistance = 0
+        average_distance = 0
         for flight in self.edges.values():
-            averageDistance += flight.distance
+            average_distance += flight.distance
 
-        return averageDistance / self.numOfEdges
+        return average_distance / self.num_edges
 
 
     def calculate_biggest_vertex(self):
@@ -138,14 +137,14 @@ class Graph(object):
         Returns:
             Vertex with most population.
         """
-        biggestCity = None
-        largestPop = 0
+        biggest_city = None
+        largest_pop = 0
         for city in self.vertices.values():
-            if city.population > largestPop:
-                largestPop = city.population
-                biggestCity = city
+            if city.population > largest_pop:
+                largest_pop = city.population
+                biggest_city = city
 
-        return biggestCity
+        return biggest_city
 
 
     def calculate_smallest_vertex(self):
@@ -154,27 +153,27 @@ class Graph(object):
         Returns:
             Vertex with least population.
         """
-        smallestCity = None
-        smallestPop = sys.maxsize
+        smallest_city = None
+        smallest_pop = sys.maxsize
         for city in self.vertices.values():
-            if city.population < smallestPop:
-                smallestPop = city.population
-                smallestCity = city
+            if city.population < smallest_pop:
+                smallest_pop = city.population
+                smallest_city = city
 
-        return smallestCity
+        return smallest_city
 
 
-    def calculate_average_city_size(self):
+    def calculate_average_vertex_size(self):
         """Calculate average vertex size.
 
         Returns:
             Average vertex size.
         """
-        averageCitySize = 0
+        average_city_size = 0
         for city in self.vertices.values():
-            averageCitySize += city.population
+            average_city_size += city.population
 
-        return averageCitySize / self.numOfVertices
+        return average_city_size / self.num_vertices
 
 
     def calculate_continents_info(self):
@@ -183,13 +182,13 @@ class Graph(object):
         Returns:
             A dict with keys are continent info and values are cities info in the corresponding continent.
         """
-        continentsDict = dict()
+        continents_dict = dict()
         for city in self.vertices.values():
-            if not city.continent in continentsDict:
-                continentsDict[city.continent] = []
-            continentsDict[city.continent].append(city)
+            if not city.continent in continents_dict:
+                continents_dict[city.continent] = []
+            continents_dict[city.continent].append(city)
 
-        return continentsDict
+        return continents_dict
 
 
     def calculate_hub_cities(self):
@@ -198,16 +197,16 @@ class Graph(object):
         Returns:
             An array of cities with most direct connections.
         """
-        hubCities = []
+        hub_cities = []
         max_connections = 0
         for city in self.vertices.values():
             if len(city.edges) > max_connections:
                 max_connections = len(city.edges)
-                hubCities = [city]
+                hub_cities = [city]
             elif len(city.edges) == max_connections:
-                hubCities.append(city)
+                hub_cities.append(city)
 
-        return hubCities
+        return hub_cities
 
 
     def generate_map_url(self):

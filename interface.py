@@ -1,7 +1,5 @@
 import webbrowser
-
 from graph.graph import Graph
-
 
 def main():
     """Main loop of the text-based user interface.
@@ -11,7 +9,7 @@ def main():
     If users enters non-integer query or undefined query, pop error message.
 
     """
-    graph = load_graph("json/map_data.json")
+    graph = load_graph("json/test_data.json")
 
     while (True):
         print_menu()
@@ -20,6 +18,7 @@ def main():
             print_not_int_error()
             back = input('\nPress Enter to return to menu\n')
             continue
+
         query = int(query)
         print('\n')
 
@@ -129,9 +128,9 @@ def print_longest_flight(graph):
     Args:
         graph: Graph object that stores map info.
     """
-    longestFlight = graph.calculate_longest_edge()
+    longest_flight = graph.calculate_longest_edge()
     print('Longest Flight:')
-    print(longestFlight.departure.code, '->', longestFlight.destination.code, ' distance: ', longestFlight.distance)
+    print(longest_flight.departure.code, '->', longest_flight.destination.code, ' distance: ', longest_flight.distance)
 
 
 def print_shortest_flight(graph):
@@ -140,9 +139,9 @@ def print_shortest_flight(graph):
     Args:
         graph: Graph object that stores map info.
     """
-    shortestFlight = graph.calculate_shortest_edge()
+    shortest_flight = graph.calculate_shortest_edge()
     print('Shortest Flight:')
-    print(shortestFlight.departure.code, '->', shortestFlight.destination.code, ' distance: ', shortestFlight.distance)
+    print(shortest_flight.departure.code, '->', shortest_flight.destination.code, ' distance: ', shortest_flight.distance)
 
 
 def print_average_distance(graph):
@@ -160,9 +159,9 @@ def print_biggest_city(graph):
     Args:
         graph: Graph object that stores map info.
     """
-    biggestCity = graph.calculate_biggest_vertex()
+    biggest_city = graph.calculate_biggest_vertex()
     print('Biggest City:')
-    print_city_Info_helper(biggestCity)
+    print_city_Info_helper(biggest_city)
 
 
 def print_smallest_city(graph):
@@ -171,9 +170,9 @@ def print_smallest_city(graph):
     Args:
         graph: Graph object that stores map info.
     """
-    smallestCity = graph.calculate_smallest_vertex()
+    smallest_city = graph.calculate_smallest_vertex()
     print('Smallest City:')
-    print_city_Info_helper(smallestCity)
+    print_city_Info_helper(smallest_city)
 
 
 def print_average_city_cize(graph):
@@ -182,7 +181,7 @@ def print_average_city_cize(graph):
     Args:
         graph: Graph object that stores map info.
     """
-    print('Average city size: ', graph.calculate_average_city_size())
+    print('Average city size: ', graph.calculate_average_vertex_size())
 
 
 def print_continents_and_cities(graph):
@@ -191,8 +190,8 @@ def print_continents_and_cities(graph):
     Args:
         graph: Graph object that stores map info.
     """
-    continentsDict = graph.calculate_continents_info()
-    for key, value in continentsDict.items():
+    continents_dict = graph.calculate_continents_info()
+    for key, value in continents_dict.items():
         print('%s: ' % key)
         for city in value:
             print('		', city.name + ' (' + city.code + ')')
@@ -205,8 +204,8 @@ def print_hub_cities(graph):
         graph: Graph object that stores map info.
     """
     print('Hub Cities: ')
-    hubCities = graph.calculate_hub_cities()
-    for city in hubCities:
+    hub_cities = graph.calculate_hub_cities()
+    for city in hub_cities:
         print(city.name + ' (' + city.code + ')')
 
 
