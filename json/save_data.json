@@ -1,0 +1,87 @@
+{
+    "metros": [
+        {
+            "code": "LIM",
+            "continent": "South America",
+            "coordinates": {
+                "S": 12,
+                "W": 77
+            },
+            "country": "PE",
+            "name": "Lima",
+            "population": 9050000,
+            "region": 1,
+            "timezone": -5
+        },
+        {
+            "code": "MEX",
+            "continent": "North America",
+            "coordinates": {
+                "N": 19,
+                "W": 99
+            },
+            "country": "MX",
+            "name": "Mexico City",
+            "population": 23400000,
+            "region": 1,
+            "timezone": -6
+        },
+        {
+            "code": "SCL",
+            "continent": "South America",
+            "coordinates": {
+                "S": 33,
+                "W": 71
+            },
+            "country": "CL",
+            "name": "Santiago",
+            "population": 6000000,
+            "region": 1,
+            "timezone": -4
+        }
+    ],
+    "routes": [
+        {
+            "distance": 24530,
+            "ports": [
+                "LIM",
+                "MEX"
+            ]
+        },
+        {
+            "distance": 2453,
+            "ports": [
+                "LIM",
+                "SCL"
+            ]
+        },
+        {
+            "distance": 24530,
+            "ports": [
+                "MEX",
+                "LIM"
+            ]
+        },
+        {
+            "distance": 4800,
+            "ports": [
+                "MEX",
+                "SCL"
+            ]
+        },
+        {
+            "distance": 2453,
+            "ports": [
+                "SCL",
+                "LIM"
+            ]
+        },
+        {
+            "distance": 4800,
+            "ports": [
+                "SCL",
+                "MEX"
+            ]
+        }
+    ]
+}

@@ -5,7 +5,7 @@ class Edge(object):
 
     """
     def __init__(self, departure, destination, distance):
-        """Constructor of edge object
+        """Constructor of edge object.
 
         Args:
             departure: Departure vertex.

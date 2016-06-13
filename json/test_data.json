@@ -40,8 +40,8 @@
 			"distance" : 2453
 		},
 		{
-			"ports" : ["MEX" , "LIM"] ,
-			"distance" : 24530
+			"ports" : ["MEX" , "SCL"] ,
+			"distance" : 4800
 		},
 		{
 			"ports" : ["LIM" , "MEX"] ,
